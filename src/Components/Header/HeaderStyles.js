@@ -1,6 +1,7 @@
 import styled from "styled-components/macro";
 
 const Header = styled.div`
+	position: fixed;
 	height: 50px;
 	background-color: brown;
 	width: 100%;

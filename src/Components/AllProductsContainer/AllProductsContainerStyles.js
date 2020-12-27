@@ -5,6 +5,7 @@ const AllProductsContainer = styled.div`
 	justify-content: flex-start;
 	flex-wrap: wrap;
 	margin: 0 auto;
+	padding-top: 50px;
 	h5 {
 		margin: 0;
 	}
@@ -17,7 +18,7 @@ const AllProductsContainer = styled.div`
 		display: flex;
 		flex-direction: column;
 		width: 24%;
-		height: 200px;
+		height: 220px;
 		/* border: 2px solid black; */
 		margin: 3px;
 	}
