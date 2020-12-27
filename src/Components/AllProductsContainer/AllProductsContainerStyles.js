@@ -9,26 +9,27 @@ const AllProductsContainer = styled.div`
 		margin: 0;
 	}
 	img {
-		width: 70%;
-		height: 110px;
-		padding-left: 29px;
+		width: 170px;
+		height: 120px;
+		padding-left: 79px;
 	}
 	.item {
 		display: flex;
 		flex-direction: column;
 		width: 24%;
 		height: 200px;
-		border: 2px solid black;
+		/* border: 2px solid black; */
 		margin: 3px;
 	}
 	.Inneritem {
 		margin-top: 20px;
-		padding-left: 14px;
+		padding-left: 54px;
 	}
 	.Inneritem > span {
 		margin-left: 10px;
 		color: red;
 		font-weight: bold;
+		margin-top: 10px;
 	}
 	button {
 		background-color: red; /* Green */
@@ -39,6 +40,7 @@ const AllProductsContainer = styled.div`
 		font-size: 16px;
 		border-radius: 50%;
 		cursor: pointer;
+		margin-top: 10px;
 	}
 
 	@media (max-width: 1000px) {
