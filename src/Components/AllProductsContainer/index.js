@@ -34,29 +34,29 @@ class AllProducts extends Component {
 		}
 	}
 	render() {
+		console.log(this.state.appProdustsData, "init");
 		return (
 			<AllProductsContainer>
-				{this.state.appProdustsData !== null
-					? this.state.appProdustsData.map((item) => {
-							return (
-								<div className="item">
-									<img
-										src={item.imageUrl}
-										alt="loading"
-									></img>
-									<div className="Inneritem">
-										<h5>{item.name}</h5>
-										<h5>
-											&#8377;
-											<span>{`${item.price}`}</span>
-										</h5>
-										<button>+</button>
-										<span>ADD</span>
-									</div>
+				{this.state.appProdustsData !== null ? (
+					this.state.appProdustsData.map((item) => {
+						return (
+							<div className="item">
+								<img src={item.imageUrl} alt="loading"></img>
+								<div className="Inneritem">
+									<h5>{item.name}</h5>
+									<h5>
+										&#8377;
+										<span>{`${item.price}`}</span>
+									</h5>
+									<button>+</button>
+									<span>ADD</span>
 								</div>
-							);
-					  })
-					: null}
+							</div>
+						);
+					})
+				) : (
+					<h1>Loading Products</h1>
+				)}
 			</AllProductsContainer>
 		);
 	}
