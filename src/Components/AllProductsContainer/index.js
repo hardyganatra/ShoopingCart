@@ -252,6 +252,8 @@ class AllProducts extends Component {
 								<h5>
 									&#8377;<span>{`${item.price}`}</span>
 								</h5>
+								<button>+</button>
+								<span>ADD</span>
 							</div>
 						</div>
 					);

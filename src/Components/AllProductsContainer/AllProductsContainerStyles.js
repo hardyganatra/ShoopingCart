@@ -10,8 +10,8 @@ const AllProductsContainer = styled.div`
 	}
 	img {
 		width: 70%;
-		height: 100px;
-		padding-left: 25px;
+		height: 110px;
+		padding-left: 29px;
 	}
 	.item {
 		display: flex;
@@ -23,8 +23,24 @@ const AllProductsContainer = styled.div`
 	}
 	.Inneritem {
 		margin-top: 20px;
-		padding-left: 10px;
+		padding-left: 14px;
 	}
+	.Inneritem > span {
+		margin-left: 10px;
+		color: red;
+		font-weight: bold;
+	}
+	button {
+		background-color: red; /* Green */
+		border: none;
+		color: white;
+		text-align: center;
+		text-decoration: none;
+		font-size: 16px;
+		border-radius: 50%;
+		cursor: pointer;
+	}
+
 	@media (max-width: 1000px) {
 		.item {
 			width: 48%;
