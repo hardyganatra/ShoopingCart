@@ -14,8 +14,8 @@ class AllProducts extends Component {
 		let req = {
 			params: {
 				auth_key: "6c55fa36a2138b23a52e74619bfdae147fa0c3e1",
-				pageNo: 2,
-				itemsPerPage: 40,
+				pageNo: 1,
+				itemsPerPage: 50,
 			},
 		};
 		this.props.getSHoopingProductsAction(req.params);

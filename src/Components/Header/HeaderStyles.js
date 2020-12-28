@@ -16,5 +16,9 @@ const Header = styled.div`
 		margin-left: 10px;
 		cursor: pointer;
 	}
+	a {
+		color: white;
+		text-decoration: none;
+	}
 `;
 export default Header;
