@@ -30,5 +30,40 @@ const CartListContainerStyles = styled.div`
 		height: 50vh;
 		background-color: gainsboro;
 	}
+	.ItemDetailsContainer {
+		display: flex;
+	}
+	.productImageDiv {
+		width: 27%;
+		border: 2px solid #e8e8e8;
+		height: 100px;
+	}
+	.productImageDiv > img {
+		width: 80px;
+		height: 80px;
+	}
+	.productData {
+		margin: 10px;
+		width: 70%;
+		height: 100px;
+	}
+	.productData div:nth-of-type(2) {
+		margin-top: 40px;
+	}
+	.select-dropdown {
+		display: flex;
+		justify-content: center;
+	}
+	.select-dropdown > select {
+		width: 30%;
+		background-color: #f5f5f5;
+		font-size: 1rem;
+		font-weight: normal;
+		max-width: 100%;
+		//////////////
+		padding: 10px 10px 10px 2px;
+		border: 1px solid #e0e0e0;
+	}
 `;
+
 export default CartListContainerStyles;
