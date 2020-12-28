@@ -55,7 +55,7 @@ const CartListContainerStyles = styled.div`
 		justify-content: center;
 	}
 	.select-dropdown > select {
-		width: 30%;
+		width: 52%;
 		background-color: #f5f5f5;
 		font-size: 1rem;
 		font-weight: normal;
