@@ -62,6 +62,7 @@ export const AddItemtoCart = (body, headers) =>
 		)
 		.then();
 export const AddItemtoCartAction = (body, headers) => {
+	console.log("plusminuschangeAction", body, headers);
 	return (dispatch) => {
 		AddItemtoCart(body, headers)
 			.then((res) => {

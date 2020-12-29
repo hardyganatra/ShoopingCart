@@ -93,7 +93,9 @@ class AllProducts extends Component {
 									{_.some(this.state.CartproductData, {
 										id: item.id,
 									}) ? (
-										<PlusMinusButton />
+										<PlusMinusButton
+											productId={item}
+										></PlusMinusButton>
 									) : (
 										<>
 											<button
