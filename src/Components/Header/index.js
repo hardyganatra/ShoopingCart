@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import HeaderStyles from "./HeaderStyles";
 import { Link, useLocation } from "react-router-dom";
 import { connect } from "react-redux";
@@ -6,6 +6,24 @@ import { connect } from "react-redux";
 const Header = (props) => {
 	const location = useLocation();
 	console.log("window", props);
+	// store position in sessionStorage
+	const handleClick = (e) => {
+		if (location.pathname === "/") {
+			sessionStorage.setItem("scrollPosition", window.pageYOffset);
+		}
+	};
+	useEffect(() => {
+		handleScrollPosition();
+	});
+	const handleScrollPosition = () => {
+		if (location.pathname === "/") {
+			const scrollPosition = sessionStorage.getItem("scrollPosition");
+			if (scrollPosition) {
+				console.log("scrollPosition", scrollPosition);
+				window.scrollTo(0, scrollPosition);
+			}
+		}
+	};
 	return (
 		<HeaderStyles>
 			<h3 className="headerText">
@@ -20,7 +38,7 @@ const Header = (props) => {
 				</span>
 				{location.pathname === "/cartItems" ? null : (
 					<span>
-						<Link to="/cartItems">
+						<Link to="/cartItems" onClick={handleClick}>
 							{" "}
 							| CART
 							<span>
