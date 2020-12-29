@@ -13,6 +13,7 @@ export default function Header() {
 						<Link to="/">{`HOME   |`}</Link>
 					</span>
 				) : null} */}
+
 				<span>
 					<Link to="/">{`HOME`}</Link>
 				</span>

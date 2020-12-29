@@ -1,8 +1,10 @@
 import React, { Component } from "react";
 import AllProductsContainer from "./AllProductsContainerStyles";
+import PlusMinusButton from "../PlusMinusButton";
 import {
 	getSHoopingProductsAction,
 	AddItemtoCartAction,
+	getSHoopingCartProductsAction,
 } from "../../middleware/Action";
 import { connect } from "react-redux";
 
@@ -11,7 +13,16 @@ class AllProducts extends Component {
 		super(props);
 		this.state = {
 			appProdustsData: null,
+			CartproductData: [],
 		};
+	}
+	getAllShopingCartProducts() {
+		let req = {
+			params: {
+				auth_key: "6c55fa36a2138b23a52e74619bfdae147fa0c3e1",
+			},
+		};
+		this.props.getSHoopingCartProductsAction(req.params);
 	}
 	getAllShopingProducts() {
 		let req = {
@@ -48,10 +59,22 @@ class AllProducts extends Component {
 			this.setState({
 				appProdustsData: this.props.ShoppingCartProducts,
 			});
+		} else if (
+			prevProps.ShoppingCartCheckOutProducts !==
+			this.props.ShoppingCartCheckOutProducts
+		) {
+			this.setState({
+				CartproductData: this.props.ShoppingCartCheckOutProducts,
+			});
+		} else if (
+			prevProps.productQuantitychanged !==
+			this.props.productQuantitychanged
+		) {
+			this.getAllShopingCartProducts();
 		}
 	}
 	render() {
-		console.log(this.state.appProdustsData, "init");
+		console.log(this.state.CartproductData, "init123");
 		return (
 			<AllProductsContainer>
 				{this.state.appProdustsData !== null ? (
@@ -75,6 +98,7 @@ class AllProducts extends Component {
 									</button>
 									<span>ADD</span>
 								</div>
+								{/* <PlusMinusButton /> */}
 							</div>
 						);
 					})
@@ -88,6 +112,10 @@ class AllProducts extends Component {
 const mapStateToProps = (state) => {
 	return {
 		ShoppingCartProducts: state.ShoppingCartReducer.ShoppingCartProducts,
+		productQuantitychanged:
+			state.ShoppingCartReducer.productQuantitychanged,
+		ShoppingCartCheckOutProducts:
+			state.ShoppingCartReducer.ShoppingCartProductsCheckOut,
 	};
 };
 const mapDispatchToProps = (dispatch) => {
@@ -96,6 +124,8 @@ const mapDispatchToProps = (dispatch) => {
 			dispatch(getSHoopingProductsAction(params)),
 		AddItemtoCartAction: (body, config) =>
 			dispatch(AddItemtoCartAction(body, config)),
+		getSHoopingCartProductsAction: (params) =>
+			dispatch(getSHoopingCartProductsAction(params)),
 	};
 };
 export default connect(mapStateToProps, mapDispatchToProps)(AllProducts);

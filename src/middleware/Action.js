@@ -76,3 +76,5 @@ export const AddItemtoCartAction = (body, headers) => {
 const AddItemtoCartSuccess = (val, body) => {
 	return { type: "REFRESH_PRODUCT_CART_LIST", payload: body };
 };
+////////////////////////////////////////////////////////////////////////////
+//refresh cart for product list container
