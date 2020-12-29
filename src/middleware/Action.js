@@ -1,4 +1,5 @@
 import axios from "axios";
+import qs from "querystring";
 
 export const getSHoopingProducts = (params) =>
 	axios
@@ -49,5 +50,30 @@ export const getSHoopingCartProductsAction = (requestParam) => {
 };
 
 const getSHoopingCartProductsActionSuccess = (val) => {
+	return { type: "GET_SHOOPING_CART_PRODUCTS", payload: val };
+};
+/// Post Request for adding Item to cart
+export const AddItemtoCart = (body, headers) =>
+	axios
+		.post(
+			"http://omega.jdomni.com/omni-automation-tools/training/cartApi",
+			qs.stringify(body),
+			headers
+		)
+		.then();
+export const AddItemtoCartAction = (body, headers) => {
+	return (dispatch) => {
+		AddItemtoCart(body, headers)
+			.then((res) => {
+				console.log("postApi", res);
+				dispatch(AddItemtoCartSuccess(res));
+			})
+			.catch((error) => {
+				console.log(error);
+			});
+	};
+};
+
+const AddItemtoCartSuccess = (val) => {
 	return { type: "GET_SHOOPING_CART_PRODUCTS", payload: val };
 };

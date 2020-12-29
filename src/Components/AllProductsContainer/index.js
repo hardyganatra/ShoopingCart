@@ -1,6 +1,9 @@
 import React, { Component } from "react";
 import AllProductsContainer from "./AllProductsContainerStyles";
-import { getSHoopingProductsAction } from "../../middleware/Action";
+import {
+	getSHoopingProductsAction,
+	AddItemtoCartAction,
+} from "../../middleware/Action";
 import { connect } from "react-redux";
 
 class AllProducts extends Component {
@@ -20,6 +23,20 @@ class AllProducts extends Component {
 		};
 		this.props.getSHoopingProductsAction(req.params);
 	}
+	addItemToCart = (item) => {
+		console.log("Added Item", item.id);
+		const config = {
+			headers: {
+				"Content-Type": "application/x-www-form-urlencoded",
+			},
+		};
+		let body = {
+			product_id: 157,
+			auth_key: "6c55fa36a2138b23a52e74619bfdae147fa0c3e1",
+			quantity: 0,
+		};
+		this.props.AddItemtoCartAction(body, config);
+	};
 	componentDidMount() {
 		this.getAllShopingProducts();
 	}
@@ -48,7 +65,14 @@ class AllProducts extends Component {
 										&#8377;
 										<span>{`${item.price}`}</span>
 									</h5>
-									<button>+</button>
+									<button
+										onClick={this.addItemToCart.bind(
+											this,
+											item
+										)}
+									>
+										+
+									</button>
 									<span>ADD</span>
 								</div>
 							</div>
@@ -70,6 +94,8 @@ const mapDispatchToProps = (dispatch) => {
 	return {
 		getSHoopingProductsAction: (params) =>
 			dispatch(getSHoopingProductsAction(params)),
+		AddItemtoCartAction: (body, config) =>
+			dispatch(AddItemtoCartAction(body, config)),
 	};
 };
 export default connect(mapStateToProps, mapDispatchToProps)(AllProducts);
