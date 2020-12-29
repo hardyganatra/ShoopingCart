@@ -1,6 +1,9 @@
 import React, { Component } from "react";
 import CartListContainerStyles from "./CartListContainerStyles";
-import { getSHoopingCartProductsAction } from "../../middleware/Action";
+import {
+	getSHoopingCartProductsAction,
+	AddItemtoCartAction,
+} from "../../middleware/Action";
 import { connect } from "react-redux";
 class CartListContainer extends Component {
 	constructor(props) {
@@ -28,10 +31,26 @@ class CartListContainer extends Component {
 			this.setState({
 				productData: this.props.ShoppingCartCheckOutProducts,
 			});
+		} else if (
+			prevProps.productQuantitychanged !==
+			this.props.productQuantitychanged
+		) {
+			this.getAllShopingCartProducts();
 		}
 	}
-	optionChangeHandler(event) {
-		console.log("optonCHange", event.target.value);
+	optionChangeHandler(item, b) {
+		console.log("optonCHange", item.id, b.target.value);
+		const config = {
+			headers: {
+				"Content-Type": "application/x-www-form-urlencoded",
+			},
+		};
+		let body = {
+			product_id: item.id,
+			auth_key: "6c55fa36a2138b23a52e74619bfdae147fa0c3e1",
+			quantity: b.target.value,
+		};
+		this.props.AddItemtoCartAction(body, config);
 	}
 	render() {
 		return this.state.productData.length > 0 ? (
@@ -65,19 +84,37 @@ class CartListContainer extends Component {
 											<div>
 												<div className="select-dropdown">
 													<select
-														onChange={
-															this
-																.optionChangeHandler
-														}
+														onChange={this.optionChangeHandler.bind(
+															this,
+															item
+														)}
 													>
-														<option value="Option 1">
+														<option value="0">
+															0
+														</option>
+														<option value="1">
 															1
 														</option>
-														<option value="Option 2">
+														<option value="2">
 															2
 														</option>
-														<option value="Option 3">
+														<option value="3">
 															3
+														</option>
+														<option value="4">
+															4
+														</option>
+														<option value="5">
+															5
+														</option>
+														<option
+															value="3"
+															selected
+															style={{
+																display: "none",
+															}}
+														>
+															{item.cartQuantity}
 														</option>
 													</select>
 												</div>
@@ -89,7 +126,9 @@ class CartListContainer extends Component {
 										</td>
 										<td>
 											&#8377;
-											<span>{`${item.price}`}</span>
+											<span>{`${
+												item.price * item.cartQuantity
+											}`}</span>
 										</td>
 									</tr>
 								</>
@@ -97,7 +136,14 @@ class CartListContainer extends Component {
 						})}
 					</table>
 				</div>
-				<div className="checkOutDiv"></div>
+				<div className="checkOutDiv">
+					<h5>
+						Total payable amount is
+						{this.state.productData.reduce((acc, currVal) => {
+							return acc + currVal.cartQuantity * currVal.price;
+						}, 0)}
+					</h5>
+				</div>
 			</CartListContainerStyles>
 		) : (
 			<div>Empty Cart</div>
@@ -109,12 +155,16 @@ const mapStateToProps = (state) => {
 	return {
 		ShoppingCartCheckOutProducts:
 			state.ShoppingCartReducer.ShoppingCartProductsCheckOut,
+		productQuantitychanged:
+			state.ShoppingCartReducer.productQuantitychanged,
 	};
 };
 const mapDispatchToProps = (dispatch) => {
 	return {
 		getSHoopingCartProductsAction: (params) =>
 			dispatch(getSHoopingCartProductsAction(params)),
+		AddItemtoCartAction: (body, config) =>
+			dispatch(AddItemtoCartAction(body, config)),
 	};
 };
 export default connect(mapStateToProps, mapDispatchToProps)(CartListContainer);

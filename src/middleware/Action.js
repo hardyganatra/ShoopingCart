@@ -27,8 +27,8 @@ const getSHoopingProductsSuccess = (val) => {
 };
 
 //getSHoopingCartProductsAction
-export const getSHoopingCartProduct = (params) =>
-	axios
+export const getSHoopingCartProduct = (params) => {
+	return axios
 		.get(
 			"http://omega.jdomni.com/omni-automation-tools/training/getAllCartItems",
 			{
@@ -36,11 +36,11 @@ export const getSHoopingCartProduct = (params) =>
 			}
 		)
 		.then();
+};
 export const getSHoopingCartProductsAction = (requestParam) => {
 	return (dispatch) => {
 		getSHoopingCartProduct(requestParam)
 			.then((res) => {
-				console.log("CartList", res);
 				dispatch(getSHoopingCartProductsActionSuccess(res.data));
 			})
 			.catch((error) => {
@@ -65,8 +65,7 @@ export const AddItemtoCartAction = (body, headers) => {
 	return (dispatch) => {
 		AddItemtoCart(body, headers)
 			.then((res) => {
-				console.log("postApi", res);
-				dispatch(AddItemtoCartSuccess(res));
+				dispatch(AddItemtoCartSuccess(res, body));
 			})
 			.catch((error) => {
 				console.log(error);
@@ -74,6 +73,6 @@ export const AddItemtoCartAction = (body, headers) => {
 	};
 };
 
-const AddItemtoCartSuccess = (val) => {
-	return { type: "GET_SHOOPING_CART_PRODUCTS", payload: val };
+const AddItemtoCartSuccess = (val, body) => {
+	return { type: "REFRESH_PRODUCT_CART_LIST", payload: body };
 };

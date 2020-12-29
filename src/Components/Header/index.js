@@ -8,15 +8,19 @@ export default function Header() {
 	return (
 		<HeaderStyles>
 			<h3 className="headerText">
-				{location.pathname === "/" ? (
+				{/* {location.pathname === "/" ? (
 					<span>
-						<Link to="/">HOME</Link>
+						<Link to="/">{`HOME   |`}</Link>
 					</span>
-				) : null}
-
+				) : null} */}
 				<span>
-					<Link to="/cartItems">CART</Link>
+					<Link to="/">{`HOME`}</Link>
 				</span>
+				{location.pathname === "/cartItems" ? null : (
+					<span>
+						<Link to="/cartItems"> | CART</Link>
+					</span>
+				)}
 			</h3>
 		</HeaderStyles>
 	);

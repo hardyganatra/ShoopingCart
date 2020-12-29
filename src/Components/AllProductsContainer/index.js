@@ -31,9 +31,9 @@ class AllProducts extends Component {
 			},
 		};
 		let body = {
-			product_id: 157,
+			product_id: item.id,
 			auth_key: "6c55fa36a2138b23a52e74619bfdae147fa0c3e1",
-			quantity: 0,
+			quantity: 1,
 		};
 		this.props.AddItemtoCartAction(body, config);
 	};
@@ -57,7 +57,7 @@ class AllProducts extends Component {
 				{this.state.appProdustsData !== null ? (
 					this.state.appProdustsData.map((item) => {
 						return (
-							<div className="item">
+							<div className="item" key={item.id}>
 								<img src={item.imageUrl} alt="loading"></img>
 								<div className="Inneritem">
 									<h5>{item.name}</h5>
