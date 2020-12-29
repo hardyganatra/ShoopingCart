@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import AllProductsContainer from "./AllProductsContainerStyles";
 import PlusMinusButton from "../PlusMinusButton";
+import _ from "lodash";
 import {
 	getSHoopingProductsAction,
 	AddItemtoCartAction,
@@ -50,6 +51,7 @@ class AllProducts extends Component {
 	};
 	componentDidMount() {
 		this.getAllShopingProducts();
+		this.getAllShopingCartProducts();
 	}
 
 	componentDidUpdate(prevProps, prevState) {
@@ -88,15 +90,23 @@ class AllProducts extends Component {
 										&#8377;
 										<span>{`${item.price}`}</span>
 									</h5>
-									<button
-										onClick={this.addItemToCart.bind(
-											this,
-											item
-										)}
-									>
-										+
-									</button>
-									<span>ADD</span>
+									{_.some(this.state.CartproductData, {
+										id: item.id,
+									}) ? (
+										<PlusMinusButton />
+									) : (
+										<>
+											<button
+												onClick={this.addItemToCart.bind(
+													this,
+													item
+												)}
+											>
+												+
+											</button>
+											<span>ADD</span>
+										</>
+									)}
 								</div>
 								{/* <PlusMinusButton /> */}
 							</div>
