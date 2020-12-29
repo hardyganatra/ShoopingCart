@@ -20,10 +20,13 @@ const Header = (props) => {
 				</span>
 				{location.pathname === "/cartItems" ? null : (
 					<span>
-						<Link to="/cartItems"> | CART</Link>
-						<span>
-							( {props.ShoppingCartCheckOutProducts.length} )
-						</span>
+						<Link to="/cartItems">
+							{" "}
+							| CART
+							<span>
+								( {props.ShoppingCartCheckOutProducts.length} )
+							</span>
+						</Link>
 					</span>
 				)}
 			</h3>
