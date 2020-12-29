@@ -1,10 +1,11 @@
 import React from "react";
 import HeaderStyles from "./HeaderStyles";
 import { Link, useLocation } from "react-router-dom";
+import { connect } from "react-redux";
 
-export default function Header() {
+const Header = (props) => {
 	const location = useLocation();
-	console.log("window", location.pathname);
+	console.log("window", props);
 	return (
 		<HeaderStyles>
 			<h3 className="headerText">
@@ -20,9 +21,19 @@ export default function Header() {
 				{location.pathname === "/cartItems" ? null : (
 					<span>
 						<Link to="/cartItems"> | CART</Link>
+						<span>
+							( {props.ShoppingCartCheckOutProducts.length} )
+						</span>
 					</span>
 				)}
 			</h3>
 		</HeaderStyles>
 	);
-}
+};
+const mapStateToProps = (state) => {
+	return {
+		ShoppingCartCheckOutProducts:
+			state.ShoppingCartReducer.ShoppingCartProductsCheckOut,
+	};
+};
+export default connect(mapStateToProps, null)(Header);
