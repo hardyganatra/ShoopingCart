@@ -19,9 +19,10 @@ const Header = (props) => {
 		if (location.pathname === "/") {
 			const scrollPosition = sessionStorage.getItem("scrollPosition");
 			if (scrollPosition) {
-				console.log("scrollPosition", scrollPosition);
+				console.log("scrollPosition1234", scrollPosition);
 				window.scrollTo(0, scrollPosition);
 			}
+			sessionStorage.removeItem("scrollPosition");
 		}
 	};
 	return (
