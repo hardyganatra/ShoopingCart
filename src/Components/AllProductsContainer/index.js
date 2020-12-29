@@ -83,7 +83,15 @@ class AllProducts extends Component {
 					this.state.appProdustsData.map((item) => {
 						return (
 							<div className="item" key={item.id}>
-								<img src={item.imageUrl} alt="loading"></img>
+								{item.imageUrl.indexOf("https") === -1 ? (
+									<h3>No Image Found</h3>
+								) : (
+									<img
+										src={item.imageUrl}
+										alt="loading"
+									></img>
+								)}
+
 								<div className="Inneritem">
 									<h5>{item.name}</h5>
 									<h5>
