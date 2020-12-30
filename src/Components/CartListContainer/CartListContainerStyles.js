@@ -1,7 +1,7 @@
 import styled from "styled-components/macro";
 
-const CartListContainerStyles = styled.div`
-	padding-top: 50px;
+export const CartListContainerStyles = styled.div`
+	padding-top: 20px;
 	display: flex;
 
 	table {
@@ -66,4 +66,13 @@ const CartListContainerStyles = styled.div`
 	}
 `;
 
-export default CartListContainerStyles;
+export const CartHeader = styled.div`
+	button {
+		margin-top: 60px;
+		background-color: yellowgreen;
+		color: black;
+		cursor: pointer;
+	}
+`;
+
+// export default CartListContainerStyles;

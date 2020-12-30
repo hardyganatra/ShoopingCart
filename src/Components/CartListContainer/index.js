@@ -1,8 +1,9 @@
 import React, { Component } from "react";
-import CartListContainerStyles from "./CartListContainerStyles";
+import { CartListContainerStyles, CartHeader } from "./CartListContainerStyles";
 import {
 	getSHoopingCartProductsAction,
 	AddItemtoCartAction,
+	ClearCartAction,
 } from "../../middleware/Action";
 import { connect } from "react-redux";
 class CartListContainer extends Component {
@@ -54,97 +55,115 @@ class CartListContainer extends Component {
 	}
 	render() {
 		return this.state.productData.length > 0 ? (
-			<CartListContainerStyles>
-				<div className="tableDiv">
-					<table>
-						<tr>
-							<th>Item Details</th>
-							<th>Quantity</th>
-							<th>Rate</th>
-							<th>Amount</th>
-						</tr>
-						{this.state.productData.map((item) => {
-							return (
-								<>
-									<tr>
-										<td>
-											<div className="ItemDetailsContainer">
-												<div className="productImageDiv">
-													<img
-														src={item.imageUrl}
-													></img>
+			<CartHeader>
+				<button
+					onClick={() => {
+						this.props.ClearCartAction(
+							this.props.ShoppingCartCheckOutProducts
+						);
+						// console.log("ClearCart", this.props.ClearCartAction());
+					}}
+				>
+					Empty Cart
+				</button>
+				<CartListContainerStyles>
+					<div className="tableDiv">
+						<table>
+							<tr>
+								<th>Item Details</th>
+								<th>Quantity</th>
+								<th>Rate</th>
+								<th>Amount</th>
+							</tr>
+							{this.state.productData.map((item) => {
+								return (
+									<>
+										<tr>
+											<td>
+												<div className="ItemDetailsContainer">
+													<div className="productImageDiv">
+														<img
+															src={item.imageUrl}
+														></img>
+													</div>
+													<div className="productData">
+														<div>{item.name}</div>
+														<div>{item.unit}</div>
+													</div>
 												</div>
-												<div className="productData">
-													<div>{item.name}</div>
-													<div>{item.unit}</div>
-												</div>
-											</div>
-										</td>
-										<td>
-											<div>
-												<div className="select-dropdown">
-													<select
-														onChange={this.optionChangeHandler.bind(
-															this,
-															item
-														)}
-													>
-														<option value="0">
-															0
-														</option>
-														<option value="1">
-															1
-														</option>
-														<option value="2">
-															2
-														</option>
-														<option value="3">
-															3
-														</option>
-														<option value="4">
-															4
-														</option>
-														<option value="5">
-															5
-														</option>
-														<option
-															value="3"
-															selected
-															style={{
-																display: "none",
-															}}
+											</td>
+											<td>
+												<div>
+													<div className="select-dropdown">
+														<select
+															onChange={this.optionChangeHandler.bind(
+																this,
+																item
+															)}
 														>
-															{item.cartQuantity}
-														</option>
-													</select>
+															<option value="0">
+																0
+															</option>
+															<option value="1">
+																1
+															</option>
+															<option value="2">
+																2
+															</option>
+															<option value="3">
+																3
+															</option>
+															<option value="4">
+																4
+															</option>
+															<option value="5">
+																5
+															</option>
+															<option
+																value="3"
+																selected
+																style={{
+																	display:
+																		"none",
+																}}
+															>
+																{
+																	item.cartQuantity
+																}
+															</option>
+														</select>
+													</div>
 												</div>
-											</div>
-										</td>
-										<td>
-											&#8377;
-											<span>{`${item.price}`}</span>
-										</td>
-										<td>
-											&#8377;
-											<span>{`${
-												item.price * item.cartQuantity
-											}`}</span>
-										</td>
-									</tr>
-								</>
-							);
-						})}
-					</table>
-				</div>
-				<div className="checkOutDiv">
-					<h5>
-						Total payable amount is
-						{this.state.productData.reduce((acc, currVal) => {
-							return acc + currVal.cartQuantity * currVal.price;
-						}, 0)}
-					</h5>
-				</div>
-			</CartListContainerStyles>
+											</td>
+											<td>
+												&#8377;
+												<span>{`${item.price}`}</span>
+											</td>
+											<td>
+												&#8377;
+												<span>{`${
+													item.price *
+													item.cartQuantity
+												}`}</span>
+											</td>
+										</tr>
+									</>
+								);
+							})}
+						</table>
+					</div>
+					<div className="checkOutDiv">
+						<h5>
+							Total payable amount is
+							{this.state.productData.reduce((acc, currVal) => {
+								return (
+									acc + currVal.cartQuantity * currVal.price
+								);
+							}, 0)}
+						</h5>
+					</div>
+				</CartListContainerStyles>
+			</CartHeader>
 		) : (
 			<div>Empty Cart</div>
 		);
@@ -165,6 +184,8 @@ const mapDispatchToProps = (dispatch) => {
 			dispatch(getSHoopingCartProductsAction(params)),
 		AddItemtoCartAction: (body, config) =>
 			dispatch(AddItemtoCartAction(body, config)),
+		ClearCartAction: (postData) => dispatch(ClearCartAction(postData)),
+		//ClearCartAction
 	};
 };
 export default connect(mapStateToProps, mapDispatchToProps)(CartListContainer);

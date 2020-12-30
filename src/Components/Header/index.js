@@ -1,57 +1,88 @@
-import React, { useEffect } from "react";
 import HeaderStyles from "./HeaderStyles";
-import { Link, useLocation } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { connect } from "react-redux";
+import React, { Component } from "react";
 
-const Header = (props) => {
-	const location = useLocation();
-	console.log("window", props);
+class Header extends Component {
+	constructor(props) {
+		super(props);
+		this.state = {
+			scroll: null,
+		};
+	}
+	componentDidMount() {
+		if (window.location.pathname === "/") {
+			const scrollPosition = parseInt(
+				sessionStorage.getItem("scrollPosition")
+			);
+			this.setState({
+				scroll: scrollPosition,
+			});
+		}
+		if (window.location.pathname === "/cartItems") {
+			const scrollPosition = parseInt(
+				sessionStorage.getItem("scrollPosition")
+			);
+			this.setState({
+				scroll: scrollPosition + 1,
+			});
+		}
+	}
+
+	// handle scroll position after content load
+	handleScrollPosition = () => {
+		const scrollPosition = sessionStorage.getItem("scrollPosition");
+		if (scrollPosition) {
+			console.log("scroll", 0, parseInt(scrollPosition));
+			window.scrollTo(0, parseInt(scrollPosition));
+		}
+	};
+	///////////////////////////////////////////
+	getSnapshotBeforeUpdate(pP, pS) {}
+	componentDidUpdate(pP, pS) {
+		console.log("updateScroll", pS.scroll, this.state.scroll);
+		if (
+			pS.scroll !== this.state.scroll &&
+			window.location.pathname === "/"
+		) {
+			this.handleScrollPosition();
+		}
+	}
+
 	// store position in sessionStorage
-	const handleClick = (e) => {
-		if (location.pathname === "/") {
-			sessionStorage.setItem("scrollPosition", window.pageYOffset);
-		}
+	handleClick = (e) => {
+		sessionStorage.setItem("scrollPosition", window.pageYOffset);
 	};
-	useEffect(() => {
-		handleScrollPosition();
-	});
-	const handleScrollPosition = () => {
-		if (location.pathname === "/") {
-			const scrollPosition = sessionStorage.getItem("scrollPosition");
-			if (scrollPosition) {
-				console.log("scrollPosition1234", scrollPosition);
-				window.scrollTo(0, scrollPosition);
-			}
-			sessionStorage.removeItem("scrollPosition");
-		}
-	};
-	return (
-		<HeaderStyles>
-			<h3 className="headerText">
-				{/* {location.pathname === "/" ? (
+	render() {
+		console.log("renderscroll", this.state.scroll);
+		return (
+			<HeaderStyles>
+				<h3 className="headerText">
 					<span>
-						<Link to="/">{`HOME   |`}</Link>
+						<Link to="/">{`HOME`}</Link>
 					</span>
-				) : null} */}
+					{window.location.pathname === "/cartItems" ? null : (
+						<span>
+							<Link to="/cartItems" onClick={this.handleClick}>
+								{" "}
+								| CART
+								<span>
+									({" "}
+									{
+										this.props.ShoppingCartCheckOutProducts
+											.length
+									}{" "}
+									)
+								</span>
+							</Link>
+						</span>
+					)}
+				</h3>
+			</HeaderStyles>
+		);
+	}
+}
 
-				<span>
-					<Link to="/">{`HOME`}</Link>
-				</span>
-				{location.pathname === "/cartItems" ? null : (
-					<span>
-						<Link to="/cartItems" onClick={handleClick}>
-							{" "}
-							| CART
-							<span>
-								( {props.ShoppingCartCheckOutProducts.length} )
-							</span>
-						</Link>
-					</span>
-				)}
-			</h3>
-		</HeaderStyles>
-	);
-};
 const mapStateToProps = (state) => {
 	return {
 		ShoppingCartCheckOutProducts:

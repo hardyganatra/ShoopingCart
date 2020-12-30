@@ -1,4 +1,5 @@
 import axios from "axios";
+import { promises } from "fs";
 import qs from "querystring";
 
 export const getSHoopingProducts = (params) =>
@@ -78,4 +79,71 @@ const AddItemtoCartSuccess = (val, body) => {
 	return { type: "REFRESH_PRODUCT_CART_LIST", payload: body };
 };
 ////////////////////////////////////////////////////////////////////////////
-//refresh cart for product list container
+
+//clear cart Action\
+export const ClearCart = (postdata) => {
+	//    axios
+	// 		.post(
+	// 			"http://omega.jdomni.com/omni-automation-tools/training/cartApi",
+	// 			qs.stringify(body),
+	// 			headers
+	// 		)
+	// 		.then();
+	const config = {
+		headers: {
+			"Content-Type": "application/x-www-form-urlencoded",
+		},
+	};
+	const postArray = [];
+	let postData = postdata;
+	postData.map((item) => {
+		let body = {
+			product_id: item.id,
+			auth_key: "6c55fa36a2138b23a52e74619bfdae147fa0c3e1",
+			quantity: 0,
+		};
+		postArray.push(
+			axios.post(
+				"http://omega.jdomni.com/omni-automation-tools/training/cartApi",
+				qs.stringify(body),
+				config
+			)
+		);
+	});
+	return axios.all(postArray);
+};
+
+export const ClearCartAction = (postData) => {
+	return (dispatch) => {
+		ClearCart(postData)
+			.then((res) => {
+				let returnData = {};
+				dispatch(ClearCartSuccess(returnData));
+			})
+			.catch((error) => {
+				console.log(error);
+			});
+	};
+};
+
+const ClearCartSuccess = (val) => {
+	return { type: "REFRESH_PRODUCT_CART_LIST", payload: val };
+};
+
+//clear cart Action\
+
+//  axios
+// 		.all([
+// 			axios.post(`/my-url`, {
+// 				myVar: "myValue",
+// 			}),
+// 			axios.post(`/my-url2`, {
+// 				myVar: "myValue",
+// 			}),
+// 		])
+// 		.then(
+// 			axios.spread((data1, data2) => {
+// 				// output of req.
+// 				console.log("data1", data1, "data2", data2);
+// 			})
+// 		);pos
