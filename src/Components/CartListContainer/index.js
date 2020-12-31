@@ -6,6 +6,7 @@ import {
 	ClearCartAction,
 } from "../../middleware/Action";
 import { connect } from "react-redux";
+import { Link } from "react-router-dom";
 class CartListContainer extends Component {
 	constructor(props) {
 		super(props);
@@ -55,6 +56,8 @@ class CartListContainer extends Component {
 	render() {
 		return this.state.productData.length > 0 ? (
 			<CartHeader>
+				<span>SHOOPING CART</span>
+				<span>{`(${this.state.productData.length} items)`}</span>
 				<button
 					onClick={() => {
 						this.props.ClearCartAction(
@@ -62,7 +65,7 @@ class CartListContainer extends Component {
 						);
 					}}
 				>
-					Empty Cart
+					Clear Cart
 				</button>
 				<CartListContainerStyles>
 					<div className="tableDiv">
@@ -82,6 +85,7 @@ class CartListContainer extends Component {
 													<div className="productImageDiv">
 														<img
 															src={item.imageUrl}
+															alt="Loading"
 														></img>
 													</div>
 													<div className="productData">
@@ -148,16 +152,28 @@ class CartListContainer extends Component {
 									</>
 								);
 							})}
+							<tr>
+								<h6>
+									<Link to="/">{"< CONTINUE SHOOPING "}</Link>
+								</h6>
+							</tr>
 						</table>
 					</div>
 					<div className="checkOutDiv">
 						<h5>
 							Total payable amount is
-							{this.state.productData.reduce((acc, currVal) => {
-								return (
-									acc + currVal.cartQuantity * currVal.price
-								);
-							}, 0)}
+							<span>
+								&#8377;
+								{this.state.productData.reduce(
+									(acc, currVal) => {
+										return (
+											acc +
+											currVal.cartQuantity * currVal.price
+										);
+									},
+									0
+								)}
+							</span>
 						</h5>
 					</div>
 				</CartListContainerStyles>

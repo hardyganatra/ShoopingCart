@@ -3,7 +3,7 @@ import styled from "styled-components/macro";
 export const CartListContainerStyles = styled.div`
 	padding-top: 20px;
 	display: flex;
-
+	height: 200px;
 	table {
 		font-family: arial, sans-serif;
 		border-collapse: collapse;
@@ -27,8 +27,10 @@ export const CartListContainerStyles = styled.div`
 	}
 	.checkOutDiv {
 		width: 25%;
-		height: 50vh;
-		background-color: gainsboro;
+		height: 30vh;
+		background-color: white;
+		border: 1px solid black;
+		padding: 10px;
 	}
 	.ItemDetailsContainer {
 		display: flex;
@@ -60,19 +62,37 @@ export const CartListContainerStyles = styled.div`
 		font-size: 1rem;
 		font-weight: normal;
 		max-width: 100%;
-		//////////////
 		padding: 10px 10px 10px 2px;
 		border: 1px solid #e0e0e0;
+	}
+	a {
+		text-decoration: none;
+		border: 1px solid red;
+		color: red;
+		padding: 10px;
+		margin-left: 30px;
+	}
+	h5 > span {
+		margin-left: 10px;
 	}
 `;
 
 export const CartHeader = styled.div`
 	button {
 		margin-top: 60px;
-		background-color: yellowgreen;
 		color: black;
 		cursor: pointer;
+		border: none;
+		color: blue;
+		margin-left: 10px;
+		background-color: white;
+	}
+	span: nth-of-type(2) {
+		margin-left: 10px;
+	}
+	span: nth-of-type(1) {
+		font-weight: bold;
+		margin-left: 10px;
 	}
 `;
-
 // export default CartListContainerStyles;

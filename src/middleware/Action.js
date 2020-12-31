@@ -1,5 +1,4 @@
 import axios from "axios";
-import { promises } from "fs";
 import qs from "querystring";
 
 export const getSHoopingProducts = (params) =>
@@ -127,17 +126,4 @@ export const ClearCartAction = (postData) => {
 
 const ClearCartSuccess = (val) => {
 	return { type: "REFRESH_PRODUCT_CART_LIST", payload: val };
-};
-
-/// Reatain Scroll position
-
-export const RetainScrolltAction = (val) => {
-	console.log("plusminuschangeAction", val);
-	return (dispatch) => {
-		dispatch(RetainScrollSuccess(val));
-	};
-};
-
-const RetainScrollSuccess = (val) => {
-	return { type: "RETAIN_SCROLL", payload: val };
 };

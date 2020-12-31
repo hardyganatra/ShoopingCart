@@ -36,16 +36,6 @@ class Header extends Component {
 			window.scrollTo(0, parseInt(scrollPosition));
 		}
 	};
-	///////////////////////////////////////////
-	getSnapshotBeforeUpdate(pP, pS) {}
-	componentDidUpdate(pP, pS) {
-		if (
-			pS.scroll !== this.state.scroll &&
-			window.location.pathname === "/"
-		) {
-			this.handleScrollPosition();
-		}
-	}
 
 	// store position in sessionStorage
 	handleClick = (e) => {
