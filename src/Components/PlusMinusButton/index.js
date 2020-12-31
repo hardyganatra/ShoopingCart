@@ -7,13 +7,13 @@ class PlusMinusButton extends Component {
 	constructor(props) {
 		super(props);
 		this.state = {
-			currentVal: 1,
+			currentVal: this.props.productId.cartQuantity,
 		};
 	}
 	DecVal = () => {
 		this.setState({
 			currentVal:
-				this.state.currentVal !== 1 ? this.state.currentVal - 1 : 1,
+				this.state.currentVal !== 0 ? this.state.currentVal - 1 : 0,
 		});
 		const config = {
 			headers: {

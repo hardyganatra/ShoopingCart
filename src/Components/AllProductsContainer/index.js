@@ -116,7 +116,6 @@ class AllProducts extends Component {
 										</>
 									)}
 								</div>
-								{/* <PlusMinusButton /> */}
 							</div>
 						);
 					})
