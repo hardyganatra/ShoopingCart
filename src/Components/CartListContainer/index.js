@@ -40,7 +40,6 @@ class CartListContainer extends Component {
 		}
 	}
 	optionChangeHandler(item, b) {
-		console.log("optonCHange", item.id, b.target.value);
 		const config = {
 			headers: {
 				"Content-Type": "application/x-www-form-urlencoded",
@@ -61,7 +60,6 @@ class CartListContainer extends Component {
 						this.props.ClearCartAction(
 							this.props.ShoppingCartCheckOutProducts
 						);
-						// console.log("ClearCart", this.props.ClearCartAction());
 					}}
 				>
 					Empty Cart
@@ -170,7 +168,6 @@ class CartListContainer extends Component {
 	}
 }
 const mapStateToProps = (state) => {
-	console.log("Cart", state.ShoppingCartReducer.ShoppingCartProductsCheckOut);
 	return {
 		ShoppingCartCheckOutProducts:
 			state.ShoppingCartReducer.ShoppingCartProductsCheckOut,

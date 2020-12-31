@@ -31,7 +31,6 @@ class PlusMinusButton extends Component {
 		this.setState({
 			currentVal: this.state.currentVal + 1,
 		});
-		console.log("", this.state.currentVal);
 	};
 
 	inccartQuantity = (quantity) => {
@@ -54,7 +53,6 @@ class PlusMinusButton extends Component {
 		}
 	}
 	render() {
-		console.log("start123", this.props.productId.id);
 		return (
 			<PlusMinusButtonStyles>
 				<div className="minus" onClick={this.DecVal}>
@@ -70,7 +68,6 @@ class PlusMinusButton extends Component {
 }
 
 const mapStateToProps = (state) => {
-	console.log("Cart", state.ShoppingCartReducer.ShoppingCartProductsCheckOut);
 	return {
 		ShoppingCartCheckOutProducts:
 			state.ShoppingCartReducer.ShoppingCartProductsCheckOut,

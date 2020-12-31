@@ -36,7 +36,6 @@ class AllProducts extends Component {
 		this.props.getSHoopingProductsAction(req.params);
 	}
 	addItemToCart = (item) => {
-		console.log("Added Item", item.id);
 		const config = {
 			headers: {
 				"Content-Type": "application/x-www-form-urlencoded",
@@ -76,7 +75,6 @@ class AllProducts extends Component {
 		}
 	}
 	render() {
-		console.log(this.state.CartproductData, "init123");
 		return (
 			<AllProductsContainer>
 				{this.state.appProdustsData !== null ? (

@@ -33,14 +33,12 @@ class Header extends Component {
 	handleScrollPosition = () => {
 		const scrollPosition = sessionStorage.getItem("scrollPosition");
 		if (scrollPosition) {
-			console.log("scroll", 0, parseInt(scrollPosition));
 			window.scrollTo(0, parseInt(scrollPosition));
 		}
 	};
 	///////////////////////////////////////////
 	getSnapshotBeforeUpdate(pP, pS) {}
 	componentDidUpdate(pP, pS) {
-		console.log("updateScroll", pS.scroll, this.state.scroll);
 		if (
 			pS.scroll !== this.state.scroll &&
 			window.location.pathname === "/"
@@ -54,7 +52,6 @@ class Header extends Component {
 		sessionStorage.setItem("scrollPosition", window.pageYOffset);
 	};
 	render() {
-		console.log("renderscroll", this.state.scroll);
 		return (
 			<HeaderStyles>
 				<h3 className="headerText">

@@ -63,7 +63,6 @@ export const AddItemtoCart = (body, headers) =>
 		)
 		.then();
 export const AddItemtoCartAction = (body, headers) => {
-	console.log("plusminuschangeAction", body, headers);
 	return (dispatch) => {
 		AddItemtoCart(body, headers)
 			.then((res) => {
@@ -130,20 +129,15 @@ const ClearCartSuccess = (val) => {
 	return { type: "REFRESH_PRODUCT_CART_LIST", payload: val };
 };
 
-//clear cart Action\
+/// Reatain Scroll position
 
-//  axios
-// 		.all([
-// 			axios.post(`/my-url`, {
-// 				myVar: "myValue",
-// 			}),
-// 			axios.post(`/my-url2`, {
-// 				myVar: "myValue",
-// 			}),
-// 		])
-// 		.then(
-// 			axios.spread((data1, data2) => {
-// 				// output of req.
-// 				console.log("data1", data1, "data2", data2);
-// 			})
-// 		);pos
+export const RetainScrolltAction = (val) => {
+	console.log("plusminuschangeAction", val);
+	return (dispatch) => {
+		dispatch(RetainScrollSuccess(val));
+	};
+};
+
+const RetainScrollSuccess = (val) => {
+	return { type: "RETAIN_SCROLL", payload: val };
+};
